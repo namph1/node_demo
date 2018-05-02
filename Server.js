@@ -4,40 +4,35 @@ var server = require("http").Server(app);
 var mysql = require("mysql");
 var io = require("socket.io")(server);
 
-var port = process.env.PORT || 8080;
+server.listen(3000);
 
-app.listen(port, function() {
-    console.log('Our app is running on http://localhost:' + port);
+var conn = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "root",
+    database: "chemmist"
 });
 
-// var conn = mysql.createConnection({
-//     host: "localhost",
-//     user: "root",
-//     password: "root",
-//     database: "chemmist"
-// });
+conn.connect(function (err) {
+    //nếu có nỗi thì in ra
+    if (err) throw err.stack;
+    //nếu thành công
+    console.log('ket noi thanh cong');
+    var sql = "SELECT * FROM tbl_users";
+    conn.query(sql, function (err, results) {
+        if (err) throw err;
+        console.log(results);
+    })
 
-// conn.connect(function (err) {
-//     //nếu có nỗi thì in ra
-//     if (err) throw err.stack;
-//     //nếu thành công
-//     console.log('Our app is running on http://localhost:' + port);
-//     console.log('ket noi thanh cong');
-//     // var sql = "SELECT * FROM tbl_users";
-//     // conn.query(sql, function (err, results) {
-//     //     if (err) throw err;
-//     //     console.log(results);
-//     // })
-
-// });
+});
 
 app.get('/public/home.html', function (req, res) {
+    res.send('Hello world');
     // var sql = "SELECT * FROM tbl_users";
     // conn.query(sql, function (err, results) {
     //     if (err) throw err;
     //     res.send(results);
     // });
-    console.log('Our app is running on http://localhost:' + port);
 });
 
 io.on("connection", function (socket) {
