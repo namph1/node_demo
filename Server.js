@@ -6,25 +6,25 @@ var io = require("socket.io")(server);
 
 server.listen(3000);
 
-var conn = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "root",
-    database: "chemmist"
-});
+// var conn = mysql.createConnection({
+//     host: "localhost",
+//     user: "root",
+//     password: "root",
+//     database: "chemmist"
+// });
 
-conn.connect(function (err) {
-    //nếu có nỗi thì in ra
-    if (err) throw err.stack;
-    //nếu thành công
-    console.log('ket noi thanh cong');
-    var sql = "SELECT * FROM tbl_users";
-    conn.query(sql, function (err, results) {
-        if (err) throw err;
-        console.log(results);
-    })
+// conn.connect(function (err) {
+//     //nếu có nỗi thì in ra
+//     if (err) throw err.stack;
+//     //nếu thành công
+//     console.log('ket noi thanh cong');
+//     var sql = "SELECT * FROM tbl_users";
+//     conn.query(sql, function (err, results) {
+//         if (err) throw err;
+//         console.log(results);
+//     })
 
-});
+// });
 
 app.get('/public/home.html', function (req, res) {
     res.send('Hello world');
