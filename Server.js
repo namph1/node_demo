@@ -4,8 +4,8 @@ var server = require("http").Server(app);
 var mysql = require("mysql");
 var io = require("socket.io")(server);
 
-server.listen(3000);
 
+server.listen(process.env.PORT|| 5000);
 // var conn = mysql.createConnection({
 //     host: "localhost",
 //     user: "root",
